@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://mediahub.fullring.io/kpiultra/sitemap.xml
+Sitemap: https://kpiultrahieulee.com/sitemap.xml
