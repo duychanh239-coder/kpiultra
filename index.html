@@ -1009,6 +1009,96 @@ code, kbd, samp, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco,
       letter-spacing: -0.015em;
     }
   </style>
+	<style id="swissMobileHeaderFix">
+  /* 1. Căn chỉnh thanh Topbar chống tràn nút 3 gạch trên mọi màn hình di động */
+  .swiss-cta-short { display: none; }
+  @media (max-width: 410px) {
+    .swiss-topbar-inner { padding: 0 12px; gap: 6px; }
+    .swiss-brand-lock { gap: 7px; }
+    .swiss-brand-name { font-size: 14px; }
+    .swiss-topbar-actions { gap: 6px; }
+    .swiss-cta-full { display: none; }
+    .swiss-cta-short { display: inline; }
+    .swiss-header-cta { padding: 0 9px; font-size: 11px; }
+  }
+
+  /* 2. Tối ưu ngăn kéo Menu 3 gạch (#swissMobileNavDrawer) */
+  #swissMobileNavDrawer {
+    background-color: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+    box-shadow: 0 18px 36px -12px rgba(11, 19, 43, 0.22);
+    max-height: calc(100vh - 56px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .swiss-drawer-grid {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  @media (min-width: 540px) {
+    .swiss-drawer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .swiss-drawer-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 9px;
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    color: #0F172A;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+  .swiss-drawer-item:hover,
+  .swiss-drawer-item:active {
+    background-color: #F1F5F9;
+    border-color: #CBD5E1;
+  }
+  .swiss-drawer-item.highlight-vip {
+    background-color: #FBF7EC;
+    border-color: #EADAA8;
+    color: #856404;
+  }
+
+  /* 3. Đồng bộ 100% chế độ Tối (Dark Mode) cho nút 3 gạch & ngăn kéo */
+  body.dark-theme .swiss-icon-btn {
+    background-color: #132042 !important;
+    border-color: #263861 !important;
+    color: #F8FAFC !important;
+  }
+  body.dark-theme .swiss-icon-btn:hover {
+    background-color: #1B2C58 !important;
+  }
+  body.dark-theme #swissMobileNavDrawer {
+    background-color: #0B132B !important;
+    border-top-color: #1E2D4F !important;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.65);
+  }
+  body.dark-theme .swiss-drawer-item {
+    background-color: #111D3D !important;
+    border-color: #1E2D4F !important;
+    color: #F1F5F9 !important;
+  }
+  body.dark-theme .swiss-drawer-item:hover {
+    background-color: #182852 !important;
+    border-color: #C59B27 !important;
+  }
+  body.dark-theme .swiss-drawer-item.highlight-vip {
+    background-color: rgba(197, 155, 39, 0.16) !important;
+    border-color: rgba(197, 155, 39, 0.45) !important;
+    color: #F3D678 !important;
+  }
+</style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-[#C59B27]/20 selection:text-[#0B132B]">
 
@@ -1084,52 +1174,69 @@ code, kbd, samp, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco,
   </div>
 
   <!-- Minimalist Swiss Editorial Navigation (Zero Text Truncation across 390px, 703px Canvas & 1440px) -->
-  <header class="swiss-topbar">
-    <div class="swiss-topbar-inner">
-      <div class="swiss-brand-lock">
-			<img id="commNavOfficialLogo" data-protected-logo="COMM-NAV-LOGO-V1" draggable="false" src="https://kpiultrahieulee.com/kpi-ultra-favicon.png" alt="Logo Chính Thức KPI ULTRA - AI GovTech Hiếu Lee" class="swiss-brand-emblem" />
-		  <span class="swiss-brand-name">KPI ULTRA</span>
-        <span class="swiss-brand-sep">|</span>
-        <span class="swiss-brand-owner">Hiếu Lee</span>
-        <span class="swiss-brand-code">GEMINI-KPI-CBCCVC-2026</span>
-      </div>
+ <header class="swiss-topbar">
+  <div class="swiss-topbar-inner">
+    <div class="swiss-brand-lock">
+      <img id="commNavOfficialLogo" data-protected-logo="COMM-NAV-LOGO-V1" draggable="false" src="https://kpiultrahieulee.com/kpi-ultra-favicon.png" alt="Logo Chính Thức KPI ULTRA - AI GovTech Hiếu Lee" class="swiss-brand-emblem" />
+      <span class="swiss-brand-name">KPI ULTRA</span>
+      <span class="swiss-brand-sep">|</span>
+      <span class="swiss-brand-owner">Hiếu Lee</span>
+      <span class="swiss-brand-code">GEMINI-KPI-CBCCVC-2026</span>
+    </div>
 
-      <nav class="swiss-desktop-nav" aria-label="Điều hướng chính">
-        <button type="button" onclick="scrollToSection('sec-brand-story')" class="swiss-nav-link active">Câu chuyện Logo</button>
-        <button type="button" onclick="scrollToSection('sec-sandbox')" class="swiss-nav-link">Đồng bộ Drive &amp; Phân tích</button>
-        <button type="button" onclick="scrollToSection('sec-messaging')" class="swiss-nav-link">Điều phối Gmail &amp; Zalo</button>
-        <button type="button" onclick="scrollToSection('sec-pricing')" class="swiss-nav-link">Bảng giá 4 Gói</button>
-        <button type="button" onclick="scrollToSection('sec-payment')" class="swiss-nav-link">Cấp phép QR</button>
-	<button type="button" onclick="scrollToSection('cam-nang-huong-dan')" class="swiss-nav-link">Cẩm nang Sử dụng</button>
-      </nav>
+    <nav class="swiss-desktop-nav" aria-label="Điều hướng chính">
+      <button type="button" onclick="scrollToSection('sec-brand-story')" class="swiss-nav-link active">Câu chuyện Logo</button>
+      <button type="button" onclick="scrollToSection('sec-sandbox')" class="swiss-nav-link">Đồng bộ Drive &amp; Phân tích</button>
+      <button type="button" onclick="scrollToSection('sec-messaging')" class="swiss-nav-link">Điều phối Gmail &amp; Zalo</button>
+      <button type="button" onclick="scrollToSection('sec-pricing')" class="swiss-nav-link">Bảng giá 4 Gói</button>
+      <button type="button" onclick="scrollToSection('sec-payment')" class="swiss-nav-link">Cấp phép QR</button>
+      <button type="button" onclick="scrollToSection('cam-nang-huong-dan')" class="swiss-nav-link">Cẩm nang Sử dụng</button>
+    </nav>
 
       <div class="swiss-topbar-actions">
-        <button type="button" id="themeToggleBtn" onclick="toggleSiteDarkTheme()" title="Chuyển chế độ Sáng / Tối" class="swiss-icon-btn">
-          <svg style="width:15px;height:15px;color:#9A7718;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-          <span id="themeToggleLabel" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Giao diện Tối</span>
-        </button>
-        <button type="button" onclick="activateVipSevenDayPass(true)" class="swiss-header-cta">
-          Dùng thử VIP 07 Ngày
-        </button>
-        <button type="button" id="swissMobileMenuBtn" onclick="toggleSwissMobileMenu()" aria-label="Danh mục phân khu" class="swiss-icon-btn swiss-mobile-toggle">
-          <svg style="width:16px;height:16px;color:#0B132B;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-      </div>
+      <button type="button" id="themeToggleBtn" onclick="toggleSiteDarkTheme()" title="Chuyển chế độ Sáng / Tối" class="swiss-icon-btn">
+        <svg style="width:15px;height:15px;color:#9A7718;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <span id="themeToggleLabel" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Giao diện Tối</span>
+      </button>
+      <button type="button" onclick="activateVipSevenDayPass(true)" class="swiss-header-cta">
+        <span class="swiss-cta-full">Dùng thử VIP 07 Ngày</span>
+        <span class="swiss-cta-short">VIP 07 Ngày</span>
+      </button>
+      <button type="button" id="swissMobileMenuBtn" onclick="toggleSwissMobileMenu()" aria-label="Danh mục phân khu" class="swiss-icon-btn swiss-mobile-toggle">
+        <svg style="width:17px;height:17px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
+  </div>
 
-    <!-- Collapsible Full Directory Drawer -->
-    <div id="swissMobileNavDrawer" class="hidden border-t border-slate-200 bg-white px-4 py-3">
-      <div class="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold text-slate-700">
-        <button type="button" onclick="scrollToSection('sec-brand-story'); toggleSwissMobileMenu(false);" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition">01. Ấn phẩm 8D &amp; Triết lý</button>
-        <button type="button" onclick="activateVipSevenDayPass(true); toggleSwissMobileMenu(false);" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition">Nhận VIP 07 Ngày (0đ)</button>
-        <button type="button" onclick="scrollToSection('sec-sandbox'); toggleSwissMobileMenu(false);" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition">02. Chấm thử Sổ Drive</button>
-        <button type="button" onclick="scrollToSection('sec-messaging'); toggleSwissMobileMenu(false);" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition">03. Gmail &amp; Zalo 1-1</button>
-        <button type="button" onclick="scrollToSection('sec-legal-radar'); toggleSwissMobileMenu(false);" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition">Cảnh báo Pháp lý 4 Gói</button>
-        <button type="button" onclick="scrollToSection('sec-rd-csat-hub'); toggleSwissMobileMenu(false);" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition">Quy chế 30/11 &amp; Khảo sát CSAT</button>
-        <button type="button" onclick="scrollToSection('sec-aegis-shield'); toggleSwissMobileMenu(false);" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition">Bảo mật &amp; Khóa phí</button>
-        <button type="button" onclick="scrollToSection('sec-pricing'); toggleSwissMobileMenu(false);" class="text-left px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition">04. Biểu phí &amp; Cấp phép QR</button>
-      </div>
+ <!-- Ngăn kéo Menu Di động đầy đủ 8 phân khu -->
+  <div id="swissMobileNavDrawer" class="hidden px-4 py-3">
+    <div class="swiss-drawer-grid">
+      <button type="button" onclick="scrollToSection('sec-brand-story'); toggleSwissMobileMenu(false);" class="swiss-drawer-item">
+        <span>01. Câu chuyện Logo &amp; Triết lý</span><span>→</span>
+      </button>
+      <button type="button" onclick="scrollToSection('sec-sandbox'); toggleSwissMobileMenu(false);" class="swiss-drawer-item">
+        <span>02. Đồng bộ Drive &amp; Chấm thử</span><span>→</span>
+      </button>
+      <button type="button" onclick="scrollToSection('sec-messaging'); toggleSwissMobileMenu(false);" class="swiss-drawer-item">
+        <span>03. Điều phối Gmail &amp; Zalo 1-1</span><span>→</span>
+      </button>
+      <button type="button" onclick="scrollToSection('sec-pricing'); toggleSwissMobileMenu(false);" class="swiss-drawer-item">
+        <span>04. Bảng giá 4 Gói &amp; Cấp phép QR</span><span>→</span>
+      </button>
+      <button type="button" onclick="scrollToSection('sec-legal-radar'); toggleSwissMobileMenu(false);" class="swiss-drawer-item">
+        <span>05. Cảnh báo Pháp lý &amp; Quy chế 30/11</span><span>→</span>
+      </button>
+      <button type="button" onclick="scrollToSection('sec-aegis-shield'); toggleSwissMobileMenu(false);" class="swiss-drawer-item">
+        <span>06. Bảo mật Dữ liệu &amp; Khóa phí</span><span>→</span>
+      </button>
+      <button type="button" onclick="scrollToSection('cam-nang-huong-dan'); toggleSwissMobileMenu(false);" class="swiss-drawer-item">
+        <span>07. Cẩm nang Sử dụng Chi tiết</span><span>→</span>
+      </button>
+      <button type="button" onclick="activateVipSevenDayPass(true); toggleSwissMobileMenu(false);" class="swiss-drawer-item highlight-vip">
+        <span>★ Kích hoạt Dùng thử VIP 07 Ngày (0đ)</span><span>↗</span>
+      </button>
     </div>
+  </div>
   </header>
 
   <!-- INSTANT 7-DAY KPI ULTRA TRIAL ACTIVE RIBBON (AUTO-UNLOCKED ON OPEN) -->
@@ -7510,39 +7617,5 @@ Founder & IP Owner: Hiếu Lee | Nationwide Sales Director: Ms. Thanh Huyền`;
     };
   })();
   </script>
-	<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const desktopLinks = document.querySelectorAll(".swiss-desktop-nav a");
-    const mobileDrawer = document.getElementById("swissMobileNavDrawer");
-    const menuBtn = document.getElementById("swissMobileMenuBtn");
-
-    if (!desktopLinks.length || !mobileDrawer) return;
-
-    // Lấy mẫu class từ các thẻ <a> có sẵn trong menu mobile để giữ nguyên style gốc
-    const existingLinks = mobileDrawer.querySelectorAll("a[href^='#']");
-    if (!existingLinks.length) return;
-
-    const savedClass = existingLinks[0].className;
-    const container = existingLinks[0].parentElement;
-    const afterAnchor = existingLinks[existingLinks.length - 1].nextElementSibling;
-
-    // Xóa các mục menu cũ trong ngăn kéo mobile
-    existingLinks.forEach((link) => link.remove());
-
-    // Tạo lại danh sách mục y hệt bản web theo đúng thứ tự
-    desktopLinks.forEach((dLink) => {
-      const mLink = document.createElement("a");
-      mLink.href = dLink.getAttribute("href");
-      mLink.textContent = dLink.textContent.trim();
-      mLink.className = savedClass;
-
-      mLink.addEventListener("click", () => {
-        if (menuBtn) menuBtn.click();
-      });
-
-      container.insertBefore(mLink, afterAnchor);
-    });
-  });
-</script>
 </body>
 </html>
