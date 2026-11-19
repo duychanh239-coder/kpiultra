@@ -7510,5 +7510,39 @@ Founder & IP Owner: Hiếu Lee | Nationwide Sales Director: Ms. Thanh Huyền`;
     };
   })();
   </script>
+	<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const desktopLinks = document.querySelectorAll(".swiss-desktop-nav a");
+    const mobileDrawer = document.getElementById("swissMobileNavDrawer");
+    const menuBtn = document.getElementById("swissMobileMenuBtn");
+
+    if (!desktopLinks.length || !mobileDrawer) return;
+
+    // Lấy mẫu class từ các thẻ <a> có sẵn trong menu mobile để giữ nguyên style gốc
+    const existingLinks = mobileDrawer.querySelectorAll("a[href^='#']");
+    if (!existingLinks.length) return;
+
+    const savedClass = existingLinks[0].className;
+    const container = existingLinks[0].parentElement;
+    const afterAnchor = existingLinks[existingLinks.length - 1].nextElementSibling;
+
+    // Xóa các mục menu cũ trong ngăn kéo mobile
+    existingLinks.forEach((link) => link.remove());
+
+    // Tạo lại danh sách mục y hệt bản web theo đúng thứ tự
+    desktopLinks.forEach((dLink) => {
+      const mLink = document.createElement("a");
+      mLink.href = dLink.getAttribute("href");
+      mLink.textContent = dLink.textContent.trim();
+      mLink.className = savedClass;
+
+      mLink.addEventListener("click", () => {
+        if (menuBtn) menuBtn.click();
+      });
+
+      container.insertBefore(mLink, afterAnchor);
+    });
+  });
+</script>
 </body>
 </html>
